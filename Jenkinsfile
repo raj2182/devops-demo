@@ -1,26 +1,22 @@
-pipeline{
-  agent any
-  stages{
-    
-    stage("build"){
-      
-      steps{
-        echo 'bild stage'
-      }
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'jdk'
     }
-    
-     stage("test"){
-      
-      steps{
-          echo 'test stage'
-      }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
+            }
+        }
     }
-  }
-  post{
-    
-    always{
-      
-      echo 'done all stages'
-    }
-  }
-}
